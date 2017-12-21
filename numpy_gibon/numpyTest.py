@@ -36,6 +36,7 @@ print('\nnan은 0으로 최환됨')
 arrD = np.nan_to_num(arrD)
 print( arrD )
  
+# 0부터 1까지 
 newdata = [1 for i in range(2)]
  
 print('\n배열4 New 출력')
