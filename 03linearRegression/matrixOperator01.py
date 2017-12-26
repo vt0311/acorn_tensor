@@ -22,8 +22,8 @@ y_data = [[152.], [185.], [180.], [196.], [142.]]
 # x는 몇행인지는 모르지만, 3열이다.
 x_column = 3 # 입력 데이터의 컬럼 갯수
 y_column = 1
-x = tf.placeholder( tf.float32, shape=[None, x_column]) # 5행 3열
-y = tf.placeholder( tf.float32, shape=[None, y_column]) # 5행 1열
+x = tf.placeholder( tf.float32, shape=[None, x_column]) # ?행 3열
+y = tf.placeholder( tf.float32, shape=[None, y_column]) # ?행 1열
  
 # w는 가중치가 3개이므로 x_column행 y_column열이어야 한다.
 w = tf.Variable( tf.random_normal([x_column, y_column])) # 3행 1열
