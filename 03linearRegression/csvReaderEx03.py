@@ -13,13 +13,14 @@ import numpy as np
 data = np.loadtxt('./sample_data2.csv', dtype=np.float32, delimiter=',')
 data = data[:, 1:]
 # print(data)
-#print(data.shape) 
+print(data.shape) 
  
 # data.shape는 tuple 자료형인데, 인덱싱이 가능하다.
 table_row = data.shape[0]
-# print(table_row)
+print(table_row)
 table_col = data.shape[1]
-# print(table_col)
+print(table_col)
+
  
 column = table_col - 1 # 입력 데이터의 컬럼 갯수
  
