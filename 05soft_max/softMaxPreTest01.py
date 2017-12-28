@@ -12,7 +12,7 @@ for item in range(len(x)) :
     y.append(np.exp(x[item]))
     
 mysum = np.sum(y)
-print('총합 : ', mysum)
+print('총합 :\n',mysum)
 
 total = 0.0
 for item in range(len(y)) :

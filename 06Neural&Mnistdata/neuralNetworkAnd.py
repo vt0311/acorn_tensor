@@ -1,0 +1,68 @@
+'''
+Created on 2017. 12. 28.
+
+@author: acorn
+'''
+# neuralNetworkAnd.py
+# And 연산에 대한 예시이다.
+# 둘 다 참일때에만 참이 되는 연산이다.
+# or 연산일 때에도 동일하게 잘 적용된다.
+ 
+import tensorflow as tf
+import matplotlib.pyplot as plt
+import numpy as np
+ 
+x_data = np.array([[0, 0], [0, 1], [1, 0], [1, 1]], dtype=np.float32)
+ 
+# y_data = np.array([[0], [0], [0], [1]], dtype=np.float32) # and 연산
+y_data = np.array([[0], [1], [1], [1]], dtype=np.float32) # or 연산
+ 
+x = tf.placeholder(tf.float32) # 4행 2열
+y = tf.placeholder(tf.float32) # 4행 1열
+ 
+# 중첩 리스트의 열 갯수 구하는 함수
+def col_length( input ):
+    sublist = input[0]
+    length = len(sublist)
+    return length
+ 
+x_column = col_length( x_data )
+print( '컬럼수 : ', x_column )
+y_column = col_length( y_data )
+print( '클래스 개수 : ', y_column )
+ 
+weight_row = x_column # x의 열수와 동일해야 한다.
+weight_column = y_column # y의 열수와 동일해야 한다.
+bias = weight_column #w의 열수와 동일해야 한다.
+ 
+w = tf.Variable(tf.random_normal([weight_row, weight_column]) ) # 2행 1열
+b = tf.Variable(tf.random_normal([bias]) )
+ 
+# Hypothesis using sigmoid: tf.div(1., 1. + tf.exp(tf.matmul(x, w)))
+# 0, 1중의 1개가 궁금하므로 시그모이드 함수를 사용한다.
+H = tf.sigmoid(tf.matmul(x, w) + b) # 4행 1열
+ 
+diff = y * tf.log(H) + (1 - y) * tf.log(1 - H)
+cost = -tf.reduce_mean( diff )
+ 
+learn_rate = 0.1
+optimizer = tf.train.GradientDescentOptimizer(learning_rate = learn_rate)
+train = optimizer.minimize(cost)
+ 
+# Accuracy computation # True if H>0.5 else False
+predicted = tf.cast(H > 0.5, dtype=tf.float32)
+accuracy = tf.reduce_mean(tf.cast(tf.equal(predicted, y), dtype=tf.float32))
+ 
+with tf.Session() as sess:
+   sess.run(tf.global_variables_initializer())
+ 
+   for step in range(10001):
+       sess.run(train, feed_dict={x: x_data, y: y_data})
+       if step % 100 == 0:
+           _cost, _w = sess.run([cost, w], feed_dict={x: x_data, y: y_data})
+           print('훈련 회수(step) :', step, '\n비용(cost) :', _cost, '\n가중치(weight) :\n', _w)
+           print('-----------------------------------------------------')
+ 
+   # Accuracy report
+   hypothesis, _predicted, _accuracy = sess.run([H, predicted, accuracy], feed_dict={x: x_data, y: y_data})
+   print("\nHypothesis: \n", hypothesis, "\nCorrect: \n", _predicted, "\nAccuracy: ", _accuracy)

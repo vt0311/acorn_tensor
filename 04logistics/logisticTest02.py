@@ -14,20 +14,21 @@ import tensorflow as tf
 import numpy as np
 
 
+
 testdata = np.loadtxt('./test02.csv', dtype= np.float32, delimiter=',')
 
 data = np.loadtxt('./train02.csv', dtype= np.float32, delimiter=',')
 print('data.shape:', data.shape)
 
 table_row = data.shape[0] # 행 갯수
-print(table_row)
+print('table_row:', table_row)
 table_col = data.shape[1] # 열 갯수
-#table_col = 2
+
 print('table_col:', table_col) # 열 갯수 
 
-column = table_col  # 입력데이터의 컬럼 갯수
+column = table_col - 1  # 입력데이터의 컬럼 갯수
 
-testing_row = 5 # 테스트 용 데이터 셋 개수
+testing_row = 4 # 테스트 용 데이터 셋 개수
 training_row = table_row  # 훈련용 데이터 셋 개수
  
 print( 'table_row : %d, training_row : %d' % (table_row , training_row))
@@ -59,8 +60,8 @@ y_test  = testdata[0:training_row, column-1:(column) ]
  
 y_test_origin = y_test
 
-#x_test = normalize(x_test)
-#y_test = normalize(y_test)
+x_test = normalize(x_test)
+y_test = normalize(y_test)
  
  
 # 파일이 총 2열로 되어있다.
@@ -83,25 +84,33 @@ w = tf.Variable(tf.random_normal([column, 1], dtype=tf.float32)) # 1행 1열
 b = tf.Variable(0.0)
 
 # ?행2열 * 2행1열
-H = tf.matmul( x, w) + b
-#H = tf.sigmoid( tf.matmul( x, w ) + b )
+#H = tf.matmul( x, w) + b
+H = tf.sigmoid( tf.matmul( x, w ) + b )
 #H =  tf.multiply(x,w)  + b 
  
-diff = tf.square( H - y)
-cost = tf.reduce_mean(diff)
+diff = y * tf.log( H ) + (1-y)* tf.log(1-H)
+#diff = tf.square( H - y)
+cost = -tf.reduce_mean(diff)
 
-learn_rate = 1e-5 
+learn_rate = 0.01
 optimizer = tf.train.GradientDescentOptimizer(learning_rate = learn_rate)
 train = optimizer.minimize(cost)
+
+predicted = tf.cast( H > 0.0, dtype=tf.float32)
+accuracy = tf.reduce_mean(tf.cast(tf.equal(predicted, y), dtype=tf.float32))
 
 sess = tf.Session()
 sess.run(tf.global_variables_initializer() )
 
 epoch = 10000
 for step in range(epoch):
-    _t, _w, _c, _h = sess.run([train, w, cost, H], feed_dict = {x:x_train, y:y_train})
+    _t, _w, _c, _h, _p, _a = sess.run([train, w, cost, H, predicted, accuracy], 
+                              feed_dict = {x:x_train, y:y_train})
     if step % (epoch / 10) == 0 :
-        print("step: %d, cost : %f " % (step, _c))
+        print("step: %d, cost : %f, accuracy: %f" % (step, _c, _a))
+        #print("accuracy:", _a)
+        #print("h:", _h)
+        #print("predicted:", _p)
         
     #print('h:', _h)
     

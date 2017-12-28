@@ -28,7 +28,7 @@ table_col = data.shape[1] # 열 갯수
 #table_col = 2
 print('table_col:', table_col) # 열 갯수 
 
-column = table_col  # 입력데이터의 컬럼 갯수
+column = table_col-1  # 입력데이터의 컬럼 갯수
 
 testing_row = 5 # 테스트 용 데이터 셋 개수
 training_row = table_row  # 훈련용 데이터 셋 개수
@@ -48,7 +48,7 @@ def rev_normalize(somedata, alist) :
     return result 
  
 x_train = data[ 0:training_row, 0:column ]
-#x_train = data[ :, 0:2 ]
+#x_train = data[ :, 0:1 ]
 y_train = data[ 0:training_row, column-1:(column) ]
 #y_train = data[ :, 1: ]
  
@@ -56,7 +56,7 @@ x_train = normalize(x_train)
 y_train = normalize(y_train) 
  
 x_test  = testdata[:, 0:column ]
-#x_test  = testdata[:, 0:2 ]
+#x_test  = testdata[:, 0:1 ]
 y_test  = testdata[0:training_row, column-1:(column) ]
 #y_test  = testdata[:, 1: ]
  
@@ -87,8 +87,6 @@ b = tf.Variable(0.0)
 
 # ?행2열 * 2행1열
 H = tf.matmul( x, w) + b
-#H = tf.sigmoid( tf.matmul( x, w ) + b )
-#H =  tf.multiply(x,w)  + b 
  
 diff = tf.square( H - y)
 cost = tf.reduce_mean(diff)
@@ -100,12 +98,19 @@ train = optimizer.minimize(cost)
 sess = tf.Session()
 sess.run(tf.global_variables_initializer() )
 
+W_val = []
+cost_val = []
+
 epoch = 10000
 for step in range(epoch):
     _t, _w, _c, _h = sess.run([train, w, cost, H], feed_dict = {x:x_train, y:y_train})
     if step % (epoch / 10) == 0 :
         print("step: %d, cost : %f " % (step, _c))
+        #sublist = [] 
         
+        
+    W_val.append(_w)
+    cost_val.append(_c)    
     #print('h:', _h)
     
 #x_test =     
@@ -156,29 +161,56 @@ import matplotlib.pylab as plt
 def step_function(x):
     return np.array(x>0, dtype = np.int)
 
-x = np.arange(-5.0, 5.0, 0.1)
+#x = np.arange(-5.0, 5.0, 0.1)
+#x = W_val 
 
-y = step_function(x)
+#y = step_function(x)
+#y = cost_val
 
-plt.plot(x, y)
-plt.ylim(-0.1, 1.1)
+#plt.ylim(-0.1, 1.1)
+#plt.plot(W_val, cost_val)
 
 #plt.show()
+
+
+mylist = []
+W_val = []
+cost_val = []
+ 
+for i in range(10000):
+    feed_W = i * 0.01 # (-3.0 <= w < 5.0)
+    curr_cost, curr_W = sess.run([cost, w], feed_dict = {w:feed_W})
+    if i % 5 == 0 :
+        sublist = []
+        sublist.append(curr_W)
+        sublist.append(curr_cost)
+        mylist.append( sublist )
+ 
+    W_val.append(curr_W)
+    cost_val.append(curr_cost)
+ 
+# Show the cost function
+for item  in mylist : # weight, cost
+    print ( item  )
+ 
+# weight와 cost를 그래프로 그린다.
+plt.plot(W_val, cost_val)
+plt.show()
 ##################################################
 
 # w를 1이라고 가정
-def sigmoid(x):
-    return 1 / ( 1 + np.exp(-x))
+#def sigmoid(x):
+#    return 1 / ( 1 + np.exp(-x))
 
-x = np.arange( -5.0, 5.0, 0.1 )
+#x = np.arange( -5.0, 5.0, 0.1 )
 
-y = sigmoid(x)
+#y = sigmoid(x)
 
-print(y)
+#print(y)
 
-plt.plot(x,y)
+#plt.plot(x,y)
 
-plt.ylim(-0.1, 1.1)
+#plt.ylim(-0.1, 1.1)
 
-plt.show()
+#plt.show()
  
