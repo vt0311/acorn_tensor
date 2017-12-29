@@ -3,7 +3,7 @@ Created on 2017. 12. 28.
 
 @author: acorn
 '''
-NetworkXor02.py
+
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np

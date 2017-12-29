@@ -3,7 +3,7 @@ Created on 2017. 12. 28.
 
 @author: acorn
 '''
-rt tensorflow as tf
+import tensorflow as tf
 import random
 import matplotlib.pyplot as plt
 from tensorflow.examples.tutorials.mnist import input_data
