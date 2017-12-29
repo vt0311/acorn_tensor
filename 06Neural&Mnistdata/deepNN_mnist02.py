@@ -5,6 +5,7 @@ Created on 2017. 12. 28.
 '''
 
 # 모듈을 임포트 한다.
+import matplotlib.pyplot as plt
 from tensorflow.examples.tutorials.mnist import input_data
  
 # read_data_sets 함수를 이용하여 하드 디스크에 다운로드한다.
