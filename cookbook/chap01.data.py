@@ -26,15 +26,16 @@ my_var = tf.Variable(tf.zeros([1,20]))
 row_dim = 2
 col_dim = 3 
 
-# Zero initialized variable
+# Zero initialized variable (2행 3열을 0으로 초기화)
 zero_var = tf.Variable(tf.zeros([row_dim, col_dim]))
 
-# One initialized variable
+# One initialized variable (2행 3열을 1로 초기화)
 ones_var = tf.Variable(tf.ones([row_dim, col_dim]))
 
 # shaped like other variable
 sess.run(zero_var.initializer)
 sess.run(ones_var.initializer)
+# 기존 텐서를 이용하여 초기화하기
 zero_similar = tf.Variable(tf.zeros_like(zero_var))
 ones_similar = tf.Variable(tf.ones_like(ones_var))
 
@@ -50,13 +51,18 @@ const_var = tf.Variable(tf.constant([8, 6, 7, 5, 3, 0, 9]))
 const_fill_var = tf.Variable(tf.constant(-1, shape=[row_dim, col_dim]))
 
 # Sequence generation
+# Generates [0.0, 0.5, 1.0] includes the end
+# 시작점과 종료점을 포함하여 요소 3개를 만들어라.(2등분)
 linear_var = tf.Variable(tf.linspace(start=0.0, stop=1.0, num=3)) # Generates [0.0, 0.5, 1.0] includes the end
 
+# Generates [6, 9, 12] doesn't includes the end
+# 6부터 시작하여 3씩 증가하되 15직전까지
 sequence_var = tf.Variable(tf.range(start=6, limit=15, delta=3)) # Generates [6, 9, 12] doesn't include the end
 
 # Random Numbers
 
 # Random Normal
+# 평균이 0.0이고 표준편차가 1.0인 랜덤한 값을 2행 3열 생성한다.
 rnorm_var = tf.random_normal([row_dim, col_dim], mean=0.0, stddev=1.0)
 
 # Add summaries to tensorboard
@@ -205,7 +211,7 @@ print(expected_output)
 # TensorFlow custom function output
 for num in test_nums:
     print(sess.run(custom_polynomial(num)))
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Activation Functions
 #----------------------------------
 #
@@ -268,7 +274,7 @@ plt.plot(x_vals, y_softsign, 'g-.', label='Softsign', linewidth=2)
 plt.ylim([-2,2])
 plt.legend(loc='upper left')
 plt.show()
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Data gathering
 #----------------------------------
 #
