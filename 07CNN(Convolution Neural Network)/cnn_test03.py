@@ -9,7 +9,7 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 
 # input data 와 관련된 변수 목록
-batch = 1 # 데이터 갯수
+batch = 1 # 데이터 갯수(이미지의 갯수)
 input_height = 3 # 높이
 input_width = 3 # 너비
 input_channels = 2 # 채널 갯수(그림의 색상수)
@@ -27,12 +27,18 @@ sess.run(tf.global_variables_initializer())
 # filter와 관련된 변수 목록
 filter_height = 2
 filter_width = 2
-out_channels = 1
+out_channels = 4
 
+# input : NHWC(1332)
+# filter 를 weight 라고 이해하면 됩니다.
+w = tf.constant(([
+    [1.0, 1.0, 1.0, 1.0], [1.0, 1.0, 1.0, 1.0],
+    [2.0, 2.0, 2.0, 2.0], [2.0, 2.0, 2.0, 2.0],
+    [1.0, 1.0, 1.0, 1.0], [1.0, 1.0, 1.0, 1.0],
+    [2.0, 2.0, 2.0, 2.0], [2.0, 2.0, 2.0, 2.0]
+    ]))
 # filter 를 weight 라고 이해하면 됩니다.
 # filter : HWCF( Height, Width, Channel, Filter)
-# input_channels : 입력 데이터의 4번째 요소와 filter의 3번째 요소는 동일해야 한다.
-w = tf.constant(([[1.0, 1.0, 1.0, 1.0], [1.0, 1.0, 1.0, 1.0]]))
 w = tf.reshape(w, [filter_height, filter_width, input_channels, out_channels])
 
 # stride와 관련된 변수
