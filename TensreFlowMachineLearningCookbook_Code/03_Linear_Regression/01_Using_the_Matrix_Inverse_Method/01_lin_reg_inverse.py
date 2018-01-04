@@ -18,49 +18,38 @@ ops.reset_default_graph()
 sess = tf.Session()
 
 # Create the data
-x_vals = np.linspace(0, 10, 100) # 0과 10을 끝점으로 하는 100개의 등간격 데이터
+x_vals = np.linspace(0, 10, 100)
 y_vals = x_vals + np.random.normal(0, 1, 100)
 
 # Create design matrix
 x_vals_column = np.transpose(np.matrix(x_vals))
 ones_column = np.transpose(np.matrix(np.repeat(1, 100)))
-
-# 각 열에 x_vals 값과 숫자 1이 들어 있는 행렬
-# A의 shape(100, 2)
 A = np.column_stack((x_vals_column, ones_column))
-#print(A.shape())
 
 # Create b matrix
 b = np.transpose(np.matrix(y_vals))
 
 # Create tensors
-A_tensor = tf.constant(A) # shape(100, 2)
-b_tensor = tf.constant(b) # shape(100, 1)
+A_tensor = tf.constant(A)
+b_tensor = tf.constant(b)
 
 # Matrix inverse solution
-# (2 * 100) * (100 * 2) => (2 * 2)
-tA_A = tf.matmul(tf.transpose(A_tensor), A_tensor) # 식1
-
-# (2 * 2)
-tA_A_inv = tf.matrix_inverse(tA_A) # 식2
-
-# (2 * 100)
-product = tf.matmul(tA_A_inv, tf.transpose(A_tensor)) # 식3
-
-# (2 * 100) * (100 * 1) => (2 * 1)
-solution = tf.matmul(product, b_tensor) # 식4
+tA_A = tf.matmul(tf.transpose(A_tensor), A_tensor)
+tA_A_inv = tf.matrix_inverse(tA_A)
+product = tf.matmul(tA_A_inv, tf.transpose(A_tensor))
+solution = tf.matmul(product, b_tensor)
 
 solution_eval = sess.run(solution)
 
 # Extract coefficients
-slope = solution_eval[0][0] # 기울기(weight)
-y_intercept = solution_eval[1][0] # y절편(bias)
+slope = solution_eval[0][0]
+y_intercept = solution_eval[1][0]
 
 print('slope: ' + str(slope))
 print('y_intercept: ' + str(y_intercept))
 
 # Get best fit line
-best_fit = [] # 직선을 그리기 위한 점 정보를 저장하는 리스트
+best_fit = []
 for i in x_vals:
   best_fit.append(slope*i+y_intercept)
 

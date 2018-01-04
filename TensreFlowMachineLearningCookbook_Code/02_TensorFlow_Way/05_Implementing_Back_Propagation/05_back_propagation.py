@@ -1,9 +1,3 @@
-'''
-Created on 2018. 1. 3.
-
-@author: acorn
-'''
-
 # Back Propagation
 #----------------------------------
 #
@@ -19,7 +13,7 @@ ops.reset_default_graph()
 # Create graph
 sess = tf.Session()
 
-# Regression Example: 회귀 문제
+# Regression Example:
 # We will create sample data as follows:
 # x-data: 100 random samples from a normal ~ N(1, 0.1)
 # target: 100 values of the value 10.
@@ -28,13 +22,13 @@ sess = tf.Session()
 # Theoretically, A = 10.
 
 # Create data
-x_vals = np.random.normal(1, 0.1, 100) # 입력 데이터(평균, 표준편차, 요소 갯수)
-y_vals = np.repeat(10., 100) # 출력 데이터(10.0을 100번 반복)
+x_vals = np.random.normal(1, 0.1, 100)
+y_vals = np.repeat(10., 100)
 x_data = tf.placeholder(shape=[1], dtype=tf.float32)
 y_target = tf.placeholder(shape=[1], dtype=tf.float32)
 
 # Create variable (one model parameter = A)
-A = tf.Variable(tf.random_normal(shape=[1])) # weight를 의미
+A = tf.Variable(tf.random_normal(shape=[1]))
 
 # Add operation to graph
 my_output = tf.multiply(x_data, A)
@@ -51,19 +45,16 @@ my_opt = tf.train.GradientDescentOptimizer(0.02)
 train_step = my_opt.minimize(loss)
 
 # Run Loop
-print('\n 회귀예제')
 for i in range(100):
-    # rand_index : 0이상 100미만에서 요소 1개 추출한 색인
     rand_index = np.random.choice(100)
-    
-    rand_x = [x_vals[rand_index]] # 입력 데이터 중 임의의 1개
-    rand_y = [y_vals[rand_index]] # 출력 데이터 중 임의의 1개
+    rand_x = [x_vals[rand_index]]
+    rand_y = [y_vals[rand_index]]
     sess.run(train_step, feed_dict={x_data: rand_x, y_target: rand_y})
     if (i+1)%25==0:
         print('Step #' + str(i+1) + ' A = ' + str(sess.run(A)))
         print('Loss = ' + str(sess.run(loss, feed_dict={x_data: rand_x, y_target: rand_y})))
 
-# Classification Example : 분류 문제
+# Classification Example
 # We will create sample data as follows:
 # x-data: sample 50 random values from a normal = N(-1, 1)
 #         + sample 50 random values from a normal = N(1, 1)
@@ -73,7 +64,7 @@ for i in range(100):
 # If sigmoid(x+A) < 0.5 -> 0 else 1
 # Theoretically, A should be -(mean1 + mean2)/2
 
-ops.reset_default_graph() # 그래프 세션 초기화
+ops.reset_default_graph()
 
 # Create graph
 sess = tf.Session()
@@ -108,7 +99,6 @@ my_opt = tf.train.GradientDescentOptimizer(0.05)
 train_step = my_opt.minimize(xentropy)
 
 # Run loop
-print('\n분류 예제')
 for i in range(1400):
     rand_index = np.random.choice(100)
     rand_x = [x_vals[rand_index]]
