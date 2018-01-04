@@ -28,7 +28,7 @@ ones_column = np.transpose(np.matrix(np.repeat(1, 100)))
 # 각 열에 x_vals 값과 숫자 1이 들어 있는 행렬
 # A의 shape(100, 2)
 A = np.column_stack((x_vals_column, ones_column))
-#print(A.shape())
+print('A.shape:', A.shape)
 
 # Create b matrix
 b = np.transpose(np.matrix(y_vals))

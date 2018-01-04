@@ -1,6 +1,10 @@
-# Linear Regression: Decomposition Method
+# Linear Regression: Decomposition Method (쿡북 115쪽)
 #----------------------------------
-#
+# 행렬 분해 기법 사용
+# 덩치가 큰 행렬은 역행렬 기법으로 무리이다
+# 행렬을 분해하는 기법으로 이를 해결할 수 있는데
+# 그중 한가지 방법이 숄레스키 분해 기법이다.
+ 
 # This function shows how to use TensorFlow to
 # solve linear regression via the matrix inverse.
 #
@@ -37,6 +41,8 @@ b_tensor = tf.constant(b)
 # Find Cholesky Decomposition
 tA_A = tf.matmul(tf.transpose(A_tensor), A_tensor)
 L = tf.cholesky(tA_A)
+# cholesky 함수는 하삼각 행렬을 반환해준다.
+# L : 하삼각 행렬
 
 # Solve L*y=t(A)*b
 tA_b = tf.matmul(tf.transpose(A_tensor), b)
@@ -44,6 +50,7 @@ sol1 = tf.matrix_solve(L, tA_b)
 
 # Solve L' * y = sol1
 sol2 = tf.matrix_solve(tf.transpose(L), sol1)
+# tf.transpose(L) : 상삼각 행렬
 
 solution_eval = sess.run(sol2)
 
