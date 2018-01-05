@@ -1,6 +1,9 @@
-# Linear Regression: L1 vs L2
+# 선형 회귀의 비용 함수
+# 3-4 Linear Regression: L1 vs L2 (쿡북 123)
 #----------------------------------
-#
+
+# 비용 함수와 학습을 변경이 수렴에 어떠한 영향을 주는가를 살펴본다.
+# 교재 128 그림
 # This function shows how to use TensorFlow to
 # solve linear regression via the matrix inverse.
 
@@ -22,7 +25,10 @@ y_vals = np.array([y[0] for y in iris.data])
 
 # Declare batch size and number of iterations
 batch_size = 25
-learning_rate = 0.4 # Will not converge with learning rate at 0.4
+
+# 학습율 0.4 와 0.05를 바꿔 가면서 테스트 요망
+#learning_rate = 0.4 # Will not converge with learning rate at 0.4
+learning_rate = 0.05
 iterations = 50
 
 # Initialize placeholders
