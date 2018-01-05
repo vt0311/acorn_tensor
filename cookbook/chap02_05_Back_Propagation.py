@@ -3,7 +3,7 @@ Created on 2018. 1. 3.
 
 @author: acorn
 '''
-
+# 역전파 구현
 # Back Propagation
 #----------------------------------
 #
