@@ -4,6 +4,7 @@ import os
 import requests
 import string
 import collections
+import tarfile
 
 from nltk.corpus import stopwords
 ###################################################################################################
@@ -44,6 +45,22 @@ def load_movie_data():
     pos_file = os.path.join(save_folder_name, 'rt-polaritydata', 'rt-polarity.pos')
     neg_file = os.path.join(save_folder_name, 'rt-polaritydata', 'rt-polarity.neg')
 
+     # Check if files are already downloaded
+    if not os.path.exists(os.path.join(save_folder_name, 'rt-polaritydata')):
+        movie_data_url = 'http://www.cs.cornell.edu/people/pabo/movie-review-data/rt-polaritydata.tar.gz'
+
+        # Save tar.gz file
+        req = requests.get(movie_data_url, stream=True)
+        with open('temp_movie_review_temp.tar.gz', 'wb') as f:
+            for chunk in req.iter_content(chunk_size=1024):
+                if chunk:
+                    f.write(chunk)
+                    f.flush()
+        # Extract tar.gz file into temp folder
+        tar = tarfile.open('temp_movie_review_temp.tar.gz', "r:gz")
+        tar.extractall(path='temp')
+        tar.close()
+        
     pos_data = []
     with open(pos_file, 'r', encoding='latin-1') as f: # 파일 열고...
         for line in f:

@@ -1,0 +1,2 @@
+model_checkpoint_path: "C:\\acorn_tensor\\cookbook\\chap07_Jayeoneo\\temp\\cbow_movie_embeddings.ckpt"
+all_model_checkpoint_paths: "C:\\acorn_tensor\\cookbook\\chap07_Jayeoneo\\temp\\cbow_movie_embeddings.ckpt"
