@@ -1,0 +1,22 @@
+gensim 관련 사이트
+
+	https://radimrehurek.com/gensim/
+	
+president_wakati.py
+			president_address.txt 텍스트 파일 읽기
+			형태소 분석
+			president.wakati 파일 생성
+			
+확장자 wakati ?
+codecs는 close ?
+			
+president_mkdic.py
+	president.model 파일 생성 
+	
+president_play.py 
+	여러가지 테스트
+	
+wiki.model 파일 생성에 시간이 많이 걸림
+	각자 개인적으로 생성해보기
+	
+wiki_play.py
