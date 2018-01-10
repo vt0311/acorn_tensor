@@ -30,7 +30,19 @@ for row in xor_data:
 
 # 데이터 학습시키기 --- (※3)
 # svm 알고리즘을 이용하여 머신 러닝 수행
-clf = svm.SVC()
+#clf = svm.SVC()
+
+# max_iter=1 -> 학습률이 50%
+#clf = svm.SVC(max_iter=1)
+
+# max_iter=2 -> 학습률이 100%
+#clf = svm.SVC(max_iter=2)
+
+#max_iter=1000000 -> 학습률이 100%
+clf = svm.SVC(max_iter=1000000)
+
+
+
 # fit(학습용_데이터, 레이블_데이터) 함수 : 데이터를 학습시킨다.
 clf.fit(x, y)
 
