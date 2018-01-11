@@ -19,10 +19,10 @@ random.shuffle(csv) # 데이터 섞기
 # 데이터를 K개로 분할하기 --- (※2)
 K = 5
 csvk = [ [] for i in range(K) ]
-print(csvk) # 5개의 리스트 [[], [], [], [], []]
+#print(csvk) # 5개의 리스트 [[], [], [], [], []]
 
 
-print(len(csv)) # 150
+#print(len(csv)) # 150
 for i in range(len(csv)):
     # 데이터를 5개의 리스트에 각각 입력한다.
     csvk[i % K].append(csv[i])
@@ -49,7 +49,7 @@ def calc_score(test, train):
 # K개로 분할해서 정답률 구하기 --- (※4)
 score_list = []
 for testc in csvk : # 5번 반복
-    # print (testc)
+    #print (testc)
     # testc 이외의 데이터를 훈련 전용 데이터로 사용하기
     trainc = []
     for i in csvk:
