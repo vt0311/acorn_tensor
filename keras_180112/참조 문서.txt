@@ -1,0 +1,32 @@
+https://github.com/hunkim/DeepLearningZeroToAll/tree/master/keras
+
+
+data-01-test-score.csv	Rename to lower case for consistency (#188)	2 months ago
+data-02-stock_daily.csv	Rename to lower case for consistency (#188)	2 months ago
+data-03-diabetes.csv	Rename to lower case for consistency (#188)	2 months ago
+data-04-zoo.csv	Rename to lower case for consistency (#188)	2 months ago
+klab-02-1-linear_regression.py	Rename to lower case for consistency (#188)	2 months ago
+klab-04-1-multi_input_linear_regression.py	Rename to lower case for consistency (#188)	2 months ago
+klab-04-2-multi_input_linear_regression.py	Rename to lower case for consistency (#188)	2 months ago
+klab-04-3-file_input_linear_regression.py	Rename to lower case for consistency (#188)	2 months ago
+klab-04-4-stock_linear_regression.py	Rename to lower case for consistency (#188)	2 months ago
+klab-05-1-logistic_regression.py	Rename to lower case for consistency (#188)	2 months ago
+klab-05-2-logistic_regression_diabetes.py	Rename to lower case for consistency (#188)	2 months ago
+klab-06-1-softmax.py	Rename to lower case for consistency (#188)	2 months ago
+klab-06-2-softmax_zoo.py	Rename to lower case for consistency (#188)	2 months ago
+klab-07-1-learning_rate_and_evaluation.py	Rename to lower case for consistency (#188)	2 months ago
+klab-07-2-linear_regression_without_min_max.py	Rename to lower case for consistency (#188)	2 months ago
+klab-07-3-linear_regression_min_max.py	Rename to lower case for consistency (#188)	2 months ago
+klab-07-4-mnist_introduction.py	Rename to lower case for consistency (#188)	2 months ago
+klab-09-1-xor.py	Rename to lower case for consistency (#188)	2 months ago
+klab-09-2-xor-nn.py	Rename to lower case for consistency (#188)	2 months ago
+klab-10-1-mnist_softmax.py	Rename to lower case for consistency (#188)	2 months ago
+klab-10-2-mnist_nn.py	Rename to lower case for consistency (#188)	2 months ago
+klab-11-1-cnn_mnist.py	Rename to lower case for consistency (#188)	2 months ago
+klab-12-1-rnn_hello_char.py	Rename to lower case for consistency (#188)	2 months ago
+klab-12-1-softmax_hello_char.py	Rename to lower case for consistency (#188)	2 months ago
+klab-12-2-rnn_long_char.py	Rename to lower case for consistency (#188)	2 months ago
+klab-12-3-rnn_stock_prediction.py	Rename to lower case for consistency (#188)	2 months ago
+klab-12-4-rnn_deep_prediction.py	Rename to lower case for consistency (#188)	2 months ago
+klab-12-5-seq2seq.py	Rename to lower case for consistency (#188)	2 months ago
+klab-13-2-mnist_tensorboard.py	Rename to lower case for consistency (#188)
