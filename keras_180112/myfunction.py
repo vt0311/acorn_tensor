@@ -8,7 +8,7 @@ Created on 2018. 1. 12.
 #from keras.models import Sequential
 #from keras.layers import Dense
 
-def xxx(data, testing_row=5):
+def getDataSet(data, testing_row=5):
     # data.shape는 tuple자료형인데, 인덱싱이 가능하다.
     table_row = data.shape[0]
     print(table_row)

@@ -10,7 +10,7 @@ import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense
 
-from keras_180112.myfunction import xxx
+from keras_180112.myfunction import getDataSet
  
 ''' 
 def xxx(data, testing_row=5):
@@ -46,7 +46,7 @@ data = np.loadtxt('./score2.csv', dtype=np.float32, delimiter=',')
 #data = data[:, 1:]
 # print(data)
 #print(data.shape) 
-x_train, x_test, y_train, y_test = xxx(data = data, testing_row = 5)
+x_train, x_test, y_train, y_test = getDataSet(data = data, testing_row = 5)
 
 model = Sequential()
 
