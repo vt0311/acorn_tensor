@@ -4,6 +4,12 @@ from keras.layers import Dense, Activation
 from keras.utils import np_utils
 import numpy as np
 
+# myfunction.printCategory() 함수 형태로 만들어 보기
+
+# 총분류 : 강아지, 고양이, 치타, 코끼리, 사슴, 노루, 돼지
+
+# 엑셀 파일(data-04-zoo.csv)로 처리하기
+
 # Predicting animal type based on various features
 xy = np.loadtxt('data-04-zoo.csv', delimiter=',', dtype=np.float32)
 x_data = xy[:, 0:-1]

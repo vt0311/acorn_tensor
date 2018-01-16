@@ -38,5 +38,8 @@ history = model.fit(x_data, y_data, epochs=1000)
 print('history 객체:') #history 작업 모든기록이 들어있는 keras내부의 history
 print('history.on_epoch_begin(200):', history.on_epoch_begin(200))
 
-print(model.predict_classes(np.array([[1, 2, 1, 1]])))
-print(model.predict_classes(np.array([[1, 2, 5, 6]])))
+#print(model.predict_classes(np.array([[1, 2, 1, 1]])))
+#print(model.predict_classes(np.array([[1, 2, 5, 6]])))
+
+print(model.predict_classes(np.array([[1, 6, 6, 6]])))
+print(model.predict_classes(np.array([[1, 7, 7, 7]])))
