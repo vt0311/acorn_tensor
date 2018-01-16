@@ -86,6 +86,11 @@ model.compile(loss='categorical_crossentropy',
               metrics=['accuracy'])
 
 # validation_data : 각 epoch의 끝에서 비용함수의 정확도 등을 평가해보기 위한 데이터
+
+# verbose : 0 -> silent 모드,  1 -> 기본값. 각 epoch 마다 일정한 간격으로 출력. 프로그레스바 출력.
+          # 2 -> 하나의 epoch 마다 1줄씩 출력.  
+
+# shuffle : boolean.  epoch 단위로 훈련용 데이터를 섞을 것인가의 여부
 model.fit(X_train, Y_train, batch_size=batch_size, epochs=nb_epoch,
           verbose=1, validation_data=(X_test, Y_test))
 
