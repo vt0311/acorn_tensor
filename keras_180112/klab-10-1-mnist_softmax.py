@@ -3,6 +3,8 @@ from keras.layers import Dense, Activation
 from keras.optimizers import Adam
 from keras import initializers
 from keras.utils import np_utils
+
+# 검색 : keras backends
 from keras import backend as K
 
 from keras.datasets import mnist
@@ -42,6 +44,15 @@ Y_train = np_utils.to_categorical(y_train, nb_classes)
 Y_test = np_utils.to_categorical(y_test, nb_classes)
 
 model = Sequential()
+
+# Dense 검색 : Core layers
+# use_bias = True 바이어스를 사용하겠다.
+# bias_initializers = 'zeros'이므로 기본값은 0이다.
+
+# kernel_initializer : w 값을 지정하는 초기자
+# random_normal(stddev = 0.01) : 평균 0.0, 표준 편차 0.01을 가지는 랜덤값
+
+
 model.add(Dense(units=nb_classes, input_dim=img_rows * img_cols,
                 kernel_initializer=initializers.random_normal(stddev=0.01),
                 use_bias=True))

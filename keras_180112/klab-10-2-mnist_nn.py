@@ -33,6 +33,7 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 # (model code from http://iostream.tistory.com/111)
 model = Sequential()
 
+# glorot_uniform : Xavier uniform initializer.
 model.add(Dense(256, input_dim=784,
                 kernel_initializer='glorot_uniform', activation='relu'))
 model.add(Dropout(0.3))
@@ -51,11 +52,16 @@ model.add(Dense(num_classes, activation='softmax'))
 model.compile(loss='categorical_crossentropy',
               optimizer='adam', metrics=['accuracy'])
 
+# fit 메소드
+# callbacks 매개변수 : fitting 이후에 적용할 함수
+# validation_split : 훈련에 반영시키지 않을 데이터의 비율( 0.0 <= 비율 <= 1.0 )
+
 history = model.fit(X_train, y_train,
                     batch_size=batch_size,
                     epochs=epochs,
                     verbose=1,
-                    validation_split=0.2)
+                    #validation_split=0.2)
+                    validation_split=0.3)
 
 
 # ==============================================================================

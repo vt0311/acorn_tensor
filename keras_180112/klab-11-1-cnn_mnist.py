@@ -56,10 +56,21 @@ Y_test = np_utils.to_categorical(y_test, nb_classes)
 
 model = Sequential()
 
+# Conv2D : convolution layer에 검색
+# nb_filter : 필수, 필터의 수
+# kernel_size : 필수, 커널의 크기
+# padding : 패딩 여부('valid'(기본값) or 'same')
+# input_shape : 입력 형상
+# nb_filters, kernel_size, padding='valid', input_shape=input_shape
 model.add(Conv2D(nb_filters, kernel_size, padding='valid', input_shape=input_shape))
 model.add(Activation('relu'))
 model.add(Conv2D(nb_filters, kernel_size))
 model.add(Activation('relu'))
+
+# MaxPooling2D : 맥스 풀링 연산을 수행하는 함수
+# pool_size : 풀의 크기 
+# strides : 스트라이드, 미명시시 pool_size 파라미터의 값을 사용한다.
+# padding : 패딩
 model.add(MaxPooling2D(pool_size=pool_size))
 model.add(Dropout(0.25))
 
@@ -74,8 +85,10 @@ model.compile(loss='categorical_crossentropy',
               optimizer='adadelta',
               metrics=['accuracy'])
 
+# validation_data : 각 epoch의 끝에서 비용함수의 정확도 등을 평가해보기 위한 데이터
 model.fit(X_train, Y_train, batch_size=batch_size, epochs=nb_epoch,
           verbose=1, validation_data=(X_test, Y_test))
+
 score = model.evaluate(X_test, Y_test, verbose=0)
 print('Test score:', score[0])
 print('Test accuracy:', score[1])
