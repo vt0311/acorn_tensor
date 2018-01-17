@@ -91,6 +91,7 @@ def showarray(a, fmt='jpeg'):
     PIL.Image.fromarray(a).save(f, fmt)
     # Show image
     plt.imshow(a)
+    plt.show()
 
 
 def T(layer):
@@ -127,7 +128,8 @@ def resize(img, size):
     # 두줄 선형 보간법(interpolation) 사용하기
     return tf.image.resize_bilinear(img, size)[0,:,:,:]
 
-
+# 이미지의 일부분(tile)에 대한 경사도를 계산해주는 함수
+# 교재 399쪽
 def calc_grad_tiled(img, t_grad, tile_size=512):
     '''Compute the value of tensor t_grad over the image in a tiled way.
     Random shifts are applied to the image to blur tile boundaries over 
@@ -165,6 +167,7 @@ def render_deepdream(t_obj, img0=img_noise,
     # defining the optimization objective, the objective is the mean of the feature
     # 선택된 속성들의 평균 값
     t_score = tf.reduce_mean(t_obj)
+    
     # Our gradients will be defined as changing the t_input to get closer to
     # the values of t_score.  Here, t_score is the mean of the feature we select,
     # and t_input will be the image octave (starting with the last)
@@ -194,7 +197,7 @@ def render_deepdream(t_obj, img0=img_noise,
         # 반복을 위하여 저주파 이미지 저장
         img = lo
         # Save the extracted hi-image
-        octaves.append(hi)
+        octaves.append(hi) # 고주파 이미지를 리스트에 저장
     
     # generate details octave by octave
     for octave in range(octave_n):
@@ -204,13 +207,17 @@ def render_deepdream(t_obj, img0=img_noise,
             #
             img = resize(img, hi.shape[:2])+hi
         for i in range(iter_n):
+            
             # Calculate gradient of the image.
+            # 이미지 경사도 계산
             g = calc_grad_tiled(img, t_grad)
+            
             # Ideally, we would just add the gradient, g, but
             # we want do a forward step size of it ('step'),
             # and divide it by the avg. norm of the gradient, so
             # we are adding a gradient of a certain size each step.
             # Also, to make sure we aren't dividing by zero, we add 1e-7.
+            # 1e-7은 0으로 나누기 오류 방지를 위해서 넣은 것이다.
             img += g*(step / (np.abs(g).mean()+1e-7))
             print('.',end = ' ')
         showarray(img/255.0)
