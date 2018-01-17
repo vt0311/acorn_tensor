@@ -157,7 +157,7 @@ def calc_grad_tiled(img, t_grad, tile_size=512):
 # 딥 드림 함수를 구현한다.
 def render_deepdream(t_obj, img0=img_noise,
                      iter_n=10, step=1.5, octave_n=4, octave_scale=1.4):
-    
+    # 교재 400쪽
     # 매개변수
     # t_obj : tensor 객체
     # img0 : float32의 값을 가진 ndarray 객체
@@ -168,6 +168,7 @@ def render_deepdream(t_obj, img0=img_noise,
     # Our gradients will be defined as changing the t_input to get closer to
     # the values of t_score.  Here, t_score is the mean of the feature we select,
     # and t_input will be the image octave (starting with the last)
+    # gradients : 미분계수 구하기
     t_grad = tf.gradients(t_score, t_input)[0] # behold the power of automatic differentiation!
 
     # Store the image
@@ -176,13 +177,21 @@ def render_deepdream(t_obj, img0=img_noise,
     octaves = []
     # Since we stored the image, we need to only calculate n-1 octaves
     for i in range(octave_n-1):
+        
         # Extract the image shape
+        # 이미지의 폭과 너비
         hw = img.shape[:2]
+        
         # Resize the image, scale by the octave_scale (resize by linear interpolation)
+        # 옥타브의 크기에 맞게 이미지 조절
         lo = resize(img, np.int32(np.float32(hw)/octave_scale))
+        
         # Residual is hi.  Where residual = image - (Resize lo to be hw-shape)
+        # 고주파 이미지
         hi = img-resize(lo, hw)
+        
         # Save the lo image for re-iterating
+        # 반복을 위하여 저주파 이미지 저장
         img = lo
         # Save the extracted hi-image
         octaves.append(hi)
