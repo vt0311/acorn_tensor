@@ -8,3 +8,4 @@
 /word2vec/wiki2.model.syn1neg.npy
 /word2vec/wiki2.model.wv.syn0.npy
 /cookbook/imagenet-vgg-verydeep-19.mat
+/ImageClassification/tmp/imagenet/classify_image_graph_def.pb
