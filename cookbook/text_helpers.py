@@ -143,7 +143,7 @@ def load_movie_data():
 
         # Save tar.gz file
         req = requests.get(movie_data_url, stream=True)
-        with open('temp_movie_review_temp.tar.gz', 'wb') as f: # wb: byte형태
+        with open('temp_movie_review_temp.tar.gz', 'wb') as f:
             for chunk in req.iter_content(chunk_size=1024):
                 if chunk:
                     f.write(chunk)

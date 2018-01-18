@@ -10,7 +10,7 @@ import collections
 import io
 import tarfile
 import urllib.request
-import text_helpers
+import cookbook.chap07_Jayeoneo.text_helpers
 from nltk.corpus import stopwords
 from tensorflow.python.framework import ops
 ops.reset_default_graph()

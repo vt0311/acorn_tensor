@@ -18,7 +18,7 @@ import collections
 import io
 import tarfile
 import urllib.request
-import text_helpers # 별도로 만들어 둔 외부 파일
+import cookbook.chap07_Jayeoneo.text_helpers # 별도로 만들어 둔 외부 파일
 from nltk.corpus import stopwords
 
 ###################################################################################################
