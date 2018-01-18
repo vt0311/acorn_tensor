@@ -55,7 +55,7 @@ model.summary()
 
 # Store model graph in png
 # (Error occurs on in python interactive shell)
-plot_model(model, to_file=os.path.basename(__file__) + '.png', show_shapes=True)
+#plot_model(model, to_file=os.path.basename(__file__) + '.png', show_shapes=True)
 
 model.compile(loss='mean_squared_error', optimizer='adam')
 

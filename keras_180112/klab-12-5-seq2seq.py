@@ -14,7 +14,11 @@ from keras.utils.vis_utils import plot_model
 digit = "0123456789"
 alpha = "abcdefghij"
 
+# char_set : 숫자, 문자 모두 글자로 취급
 char_set = list(set(digit + alpha))  # id -> char
+print(char_set)
+
+# 글자(숫자형 글자) 1개와 인덱스 번호 1개를 가지고 있는 사전
 char_dic = {w: i for i, w in enumerate(char_set)}
 
 data_dim = len(char_set)  # one hot encoding size
@@ -25,8 +29,14 @@ num_classes = len(char_set)
 dataX = []
 dataY = []
 
+#for i in range(4) :
+#    print(digit[i]) # 상단의 i번째
+#    print(alpha[i]) # 상단의 i번째
+
 for i in range(1000):
-    rand_pick = np.random.choice(10, 7)
+    rand_pick = np.random.choice(10, 7) # 0부터 9까지의 숫자 중에서 임의로 7개 뽑아낸다.
+    
+    # x, y : 사전에서 해당 키의 인덱스를 저장 
     x = [char_dic[digit[c]] for c in rand_pick]
     y = [char_dic[alpha[c]] for c in rand_pick]
     dataX.append(x)
@@ -54,6 +64,7 @@ model = Sequential()
 model.add(LSTM(32, input_shape=(time_steps, data_dim), return_sequences=False))
 
 # For the decoder's input, we repeat the encoded input for each time step
+# RepeatVector : 입력을 time_steps번 반복하겠다.
 model.add(RepeatVector(time_steps))
 # The decoder RNN could be multiple layers stacked or a single layer
 
@@ -70,7 +81,7 @@ model.fit(dataX, dataY, epochs=1000)
 
 # Store model graph in png
 # (Error occurs on in python interactive shell)
-plot_model(model, to_file=os.path.basename(__file__) + '.png', show_shapes=True)
+#plot_model(model, to_file=os.path.basename(__file__) + '.png', show_shapes=True)
 
 
 # Create test data set for fun

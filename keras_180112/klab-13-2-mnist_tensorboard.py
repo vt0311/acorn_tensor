@@ -18,9 +18,9 @@ from keras.callbacks import TensorBoard
 
 np.random.seed(1337)  # for reproducibility
 
-batch_size = 128
-nb_classes = 10
-nb_epoch = 12
+batch_size = 128  # 일괄 처리 사이즈
+nb_classes = 10  # 0 ~ 9
+nb_epoch = 12 # 훈련 횟수(12번)
 
 img_rows, img_cols = 28, 28
 nb_filters = 32
@@ -49,6 +49,7 @@ print('X_train shape:', X_train.shape)
 print(X_train.shape[0], 'train samples')
 print(X_test.shape[0], 'test samples')
 
+# one hot 인코딩
 Y_train = np_utils.to_categorical(y_train, nb_classes)
 Y_test = np_utils.to_categorical(y_test, nb_classes)
 
@@ -74,15 +75,26 @@ model.add(Dropout(0.5))
 model.add(Dense(nb_classes))
 model.add(Activation('softmax'))
 
+# optimizer : 'sgd', 'adam', 'adadelta'
 model.compile(loss='categorical_crossentropy',
               optimizer='adadelta',
               metrics=['accuracy'])
 
+# TensorBoard 매개변수 
+# log_dir : 로그 파일이 저장되는 경로
+# histogram_freq : 텐서 보드 내부에서 함수에 대한 히스토그램 사용여부.
+#                 0이면 계산 안함.
+# write_graph : Boolean, 그래프를 보여줄것인가의 여부.
+#                True이면 로그 파일의 크기가 좀 커진다.
+# write_images : Boolean, whether to write model weights to visualize as image in TensorBoard.
+#                 
 tensorboard = TensorBoard(log_dir='./logs',
                           histogram_freq=0,
                           write_graph=True,
                           write_images=False)
 
+# fit : 훈련시키다.
+# 훈련을 마쳤을 때 tensorboard 객체를 콜백한다.
 model.fit(X_train, Y_train,
           batch_size=batch_size,
           epochs=nb_epoch,

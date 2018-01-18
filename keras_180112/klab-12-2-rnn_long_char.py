@@ -15,20 +15,28 @@ sentence = ("if you want to build a ship, don't drum up people together to "
             "collect wood and don't assign them tasks and work, but rather "
             "teach them to long for the endless immensity of the sea.")
 
+# unique한 글자들을 저장하고 있는 리스트
 char_set = list(set(sentence))  # id -> char ['i', 'l', 'e', 'o', 'h', ...]
+
+# 글자 1개와 각 인덱스 1개를 가지고 있는 사전
+# 예시 : {'a':1, 'b':5, ...}
 char_dic = {w: i for i, w in enumerate(char_set)}
 
-data_dim = len(char_set)
-seq_length = timesteps = 10
-num_classes = len(char_set)
+data_dim = len(char_set)  # 입력의 차원
+seq_length = timesteps = 10  # 시퀀스 길이 (개발자가 지정)
+num_classes = len(char_set)  # 분류되는 클래스의 갯수
 
 dataX = []
 dataY = []
-for i in range(0, len(sentence) - seq_length):
+for i in range(0, len(sentence) - seq_length):  # 10 - 4 = 6   # (0, 6)  # 6번 돈다.
+    # i = 0 일때
+    # x_str = sentence[ 0 : 4 ]
+    # y_str = sentence[ 1 : 5 ]
     x_str = sentence[i:i + seq_length]
     y_str = sentence[i + 1: i + seq_length + 1]
     print(x_str, '->', y_str)
 
+    # 각 글자들의 인덱스를 저장하고 있는 리스트
     x = [char_dic[c] for c in x_str]  # char to index
     y = [char_dic[c] for c in y_str]  # char to index
 
