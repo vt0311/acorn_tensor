@@ -44,11 +44,11 @@ vgg_path = 'imagenet-vgg-verydeep-19.mat' # 바이너리 파일
 
 # Default Arguments
 original_image_weight = 5.0  # 원본 이미지의 최초 가중치
-style_image_weight = 500.0  # 스타일 이미지의 최최 가중치
+style_image_weight = 500.0  # 스타일 이미지의 최초 가중치
 regularization_weight = 100
 learning_rate = 0.001  # 학습율
-#generations = 5000
-generations = 60  # 총 학습 횟수
+generations = 5000
+#generations = 60  # 총 학습 횟수
 #output_generations = 250
 output_generations = 20  # 20회마다 출력하겠다. 
 
