@@ -6,7 +6,7 @@ from keras.layers.pooling import MaxPooling2D
 
 # 카테고리 지정하기
 categories = ["chair", "camera", "butterfly", "elephant"]
-nb_classes = len(categories)
+nb_classes = len(categories) # 4
 
 # 이미지 크기 지정하기
 image_w = 64
@@ -39,7 +39,7 @@ model.add(Dense(512))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 
-model.add(Dense(nb_classes)) # 5개의 클래스
+model.add(Dense(nb_classes)) # 4개의 클래스
 model.add(Activation('softmax'))
 
 model.compile(loss='binary_crossentropy',

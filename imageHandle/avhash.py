@@ -1,11 +1,16 @@
 from PIL import Image
+# PIL : Python Image Library
 import numpy as np
 
 # 이미지 데이터를 Average Hash로 변환하기 --- (※1)
 def average_hash(fname, size = 16):
     img = Image.open(fname) # 이미지 데이터 열기---(※2)
-    img = img.convert('L') # 그레이스케일로 변환하기 --- (※3)
-    img = img.resize((size, size), Image.ANTIALIAS) # 리사이즈하기 --- (※4)
+    
+    # convert 매개 변수
+    # L(그레이 모드) 1(이진화) RGB RGBA(A: 투명(0.0)/불투명(1.0) 나타냄)
+    img = img.convert('L') # 그레이스케일로 변환하기 (흑백으로) --- (※3)
+    # ANTIALIAS ? : 픽셀 다른 부분들끼리 만나도 자연스럽게 보이도록 하는 것.
+    img = img.resize((size, size), Image.ANTIALIAS) # 리사이즈하기 (16 X 16) --- (※4)
 
     pixel_data = img.getdata() # 픽셀 데이터 가져오기 --- (※5)
     print(type(pixel_data)) # <class 'ImagingCore'>

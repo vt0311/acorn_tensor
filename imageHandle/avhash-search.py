@@ -42,23 +42,34 @@ def hamming_dist(a, b):
 def enum_all_files(path):
     # os.walk : 하위 디렉토리를 쉽게 검색할 수 있다.
     for root, dirs, files in os.walk(path):
-        for f in files:
+        
+        for f in files:  # 모든 파일에 대하여 ...
             # os.path.join : 디렉토리 이름과 파일 이름을 연결하여 전체 경로를 만들어 준다.
             fname = os.path.join(root, f)
+            
+            # jpg파일이나 png파일에 대하여...
             if re.search(r'\.(jpg|jpeg|png)$', fname):
                 yield fname # yield : 제너레이터 함수로 만들기(for 반복문 사용이 가능해짐)
  
 # 이미지 찾기 --- (※4)
 def find_image(fname, rate):
-    src = average_hash(fname)
+    
+    src = average_hash(fname) # 원본 그림
     # print( 'src : ', src )
+    
     for fname in enum_all_files(search_dir):
         fname = fname.replace('\\', '/')
-        dst = average_hash(fname)
+        
+        dst = average_hash(fname)  # 비교 대상 그림
         # print('dst : ', dst)
+        
+        # 해밍 거리를 구하고...
         diff_r = hamming_dist(src, dst) / 256
         # print("[check] ",fname)
-        if diff_r < rate:
+        
+         # 기준으로 잡은 거리보다 작으면... (rate = 0.25 )
+         # why : 해밍 거리는 불일치하는 것을 기준으로 잡으므로...
+        if diff_r < rate: 
             yield (diff_r, fname)
  
 # 찾기 --- (※5) # "./image/101_ObjectCategories"
@@ -67,6 +78,7 @@ html = ""
  
 # 0.25 : 75% 이상의 픽셀이 동일한 것 모두 찾아라.
 sim = list(find_image(srcfile, 0.25))
+# 유사도가 높은 항목이 앞으로 오도록 정렬...
 sim = sorted(sim, key=lambda x:x[0])
  
 for r, f in sim:
@@ -79,7 +91,7 @@ for r, f in sim:
         os.path.basename(f) + ']</h3>'+ \
         '<p><a href="' + f + '"><img src="' + f + '" width=400>'+ \
         '</a></p></div>'
-    html += s
+    html += s # s하나를 그림 한개라고 보면 된다.
  
 # HTML로 출력하기
 html = """<html><head><meta charset="utf8"></head>
