@@ -24,6 +24,11 @@ from sklearn import datasets
 from tensorflow.python.framework import ops
 ops.reset_default_graph()
 
+# 랜덤 방지
+seed = 500
+tf.set_random_seed(seed)
+np.random.seed(seed)
+
 # Create graph
 sess = tf.Session()
 
