@@ -14,7 +14,7 @@
 # for I. setosa classification.
 
 # 랜덤하게 데이터를 뽑기 때문에 테스트마다 그림이 다르게 나올 수 있다. 
-# 그래서 random send() 값을 동일하게 준다.
+# 그래서 random seed() 값을 동일하게 준다.
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -22,6 +22,10 @@ import tensorflow as tf
 from sklearn import datasets
 from tensorflow.python.framework import ops
 ops.reset_default_graph()
+
+seed = 500
+tf.set_random_seed(seed)
+np.random.seed(seed)
 
 # Create graph
 sess = tf.Session()
@@ -49,17 +53,20 @@ y_vals_train = y_vals[train_indices]
 y_vals_test = y_vals[test_indices]
 
 # Declare batch size
-batch_size = 100
+batch_size = 100  # 한번에 100개씩 넣어서 실행하겠습니다.
 
 # Initialize placeholders
 x_data = tf.placeholder(shape=[None, 2], dtype=tf.float32)
 y_target = tf.placeholder(shape=[None, 1], dtype=tf.float32)
 
 # Create variables for linear regression
+# A는 weight(가중치)
 A = tf.Variable(tf.random_normal(shape=[2, 1]))
 b = tf.Variable(tf.random_normal(shape=[1, 1]))
 
 # Declare model operations
+# A * xi - b ( p.148 의 공식)
+# model_output은 가설
 model_output = tf.subtract(tf.matmul(x_data, A), b)
 
 # Declare vector L2 'norm' function squared
@@ -75,6 +82,8 @@ classification_term = tf.reduce_mean(tf.maximum(0., tf.subtract(1., tf.multiply(
 loss = tf.add(classification_term, tf.multiply(alpha, l2_norm))
 
 # Declare prediction function
+# prediction : 예측함수, accuracy : 정확도 함수
+# sign : 데이터가 양수이면 +1, 음수이면 -1
 prediction = tf.sign(model_output)
 accuracy = tf.reduce_mean(tf.cast(tf.equal(prediction, y_target), tf.float32))
 
@@ -87,10 +96,11 @@ init = tf.global_variables_initializer()
 sess.run(init)
 
 # Training loop
-loss_vec = []
-train_accuracy = []
-test_accuracy = []
+loss_vec = [] # 비용 함수 값
+train_accuracy = [] # 훈련동 정확도
+test_accuracy = [] # 테스트용 정확도
 for i in range(500):
+    # 120개에서 100개의 데이터를 임의로 복원 추출
     rand_index = np.random.choice(len(x_vals_train), size=batch_size)
     rand_x = x_vals_train[rand_index]
     rand_y = np.transpose([y_vals_train[rand_index]])
@@ -132,12 +142,17 @@ for i in x1_vals:
     best_fit.append(slope*i+y_intercept)
 
 # Separate I. setosa
+# setosa 품종과 아닌 것으로 분리.
+# setosa 품종 d[0] : 꽃받침의 너비, d[1] : 꽃잎의 너비.
 setosa_x = [d[1] for i, d in enumerate(x_vals) if y_vals[i] == 1]
 setosa_y = [d[0] for i, d in enumerate(x_vals) if y_vals[i] == 1]
+
+# setosa 품종이 아닌 것
 not_setosa_x = [d[1] for i, d in enumerate(x_vals) if y_vals[i] == -1]
 not_setosa_y = [d[0] for i, d in enumerate(x_vals) if y_vals[i] == -1]
 
 # Plot data and line
+# 직선 그리는 영역
 plt.plot(setosa_x, setosa_y, 'o', label='I. setosa')
 plt.plot(not_setosa_x, not_setosa_y, 'x', label='Non-setosa')
 plt.plot(x1_vals, best_fit, 'r-', label='Linear Separator', linewidth=3)
@@ -148,7 +163,7 @@ plt.xlabel('Petal Width')
 plt.ylabel('Sepal Length')
 plt.show()
 
-# Plot train/test accuracies
+# Plot train/test accuracies(정확도)
 plt.plot(train_accuracy, 'k-', label='Training Accuracy')
 plt.plot(test_accuracy, 'r--', label='Test Accuracy')
 plt.title('Train and Test Set Accuracies')
@@ -157,7 +172,7 @@ plt.ylabel('Accuracy')
 plt.legend(loc='lower right')
 plt.show()
 
-# Plot loss over time
+# Plot loss over time(비용 함수 그리기)
 plt.plot(loss_vec, 'k-')
 plt.title('Loss per Generation')
 plt.xlabel('Generation')
