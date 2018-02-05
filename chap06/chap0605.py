@@ -33,7 +33,8 @@ import requests
 from tensorflow.python.framework import ops
 
 # name of data file
-birth_weight_file = 'birth_weight.csv'
+#birth_weight_file = 'birth_weight.csv'
+birth_weight_file = 'new_baby.csv'
 
 # download data and create data file if file does not exist in current directory
 if not os.path.exists(birth_weight_file):
