@@ -15,10 +15,12 @@ def snn(address1, address2, dropout_keep_prob,
         cell_unit = tf.contrib.rnn.BasicLSTMCell#tf.nn.rnn_cell.BasicLSTMCell
         
         # Forward direction cell
+        # 순방향 셀
         lstm_forward_cell = cell_unit(num_hidden, forget_bias=1.0)
         lstm_forward_cell = tf.contrib.rnn.DropoutWrapper(lstm_forward_cell, output_keep_prob=dropout_keep_prob)
         
         # Backward direction cell
+        # 양방향 셀
         lstm_backward_cell = cell_unit(num_hidden, forget_bias=1.0)
         lstm_backward_cell = tf.contrib.rnn.DropoutWrapper(lstm_backward_cell, output_keep_prob=dropout_keep_prob)
     

@@ -13,7 +13,7 @@ import tensorflow as tf
 from tensorflow.python.framework import ops
 ops.reset_default_graph()
 
-import siamese_similarity_model as model
+import chap09.siamese_similarity_model as model
 
 # Start a graph session
 sess = tf.Session()
