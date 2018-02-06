@@ -1,0 +1,3 @@
+ham	i am boy
+ham	you are girl
+spam	i am singer

@@ -1,0 +1,85 @@
+2018-02-02 17:49:46.064264: I C:\tf_jenkins\home\workspace\rel-win\M\windows\PY\36\tensorflow\core\platform\cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX AVX2
+Loading Shakespeare Data
+Not found, downloading Shakespeare texts from www.gutenberg.org
+Cleaning Text
+Building Shakespeare Vocab
+Vocabulary Length = 8009
+Starting Epoch #1 of 10.
+Iteration: 10, Epoch: 1, Batch: 10 out of 182, Loss: 9.79
+Iteration: 20, Epoch: 1, Batch: 20 out of 182, Loss: 9.32
+Iteration: 30, Epoch: 1, Batch: 30 out of 182, Loss: 8.69
+Iteration: 40, Epoch: 1, Batch: 40 out of 182, Loss: 8.35
+Iteration: 50, Epoch: 1, Batch: 50 out of 182, Loss: 8.05
+thou art more what what what is what is a
+to be or not to
+wherefore art thou poorest that's a
+Iteration: 60, Epoch: 1, Batch: 60 out of 182, Loss: 8.01
+Iteration: 70, Epoch: 1, Batch: 70 out of 182, Loss: 7.69
+Iteration: 80, Epoch: 1, Batch: 80 out of 182, Loss: 7.50
+Iteration: 90, Epoch: 1, Batch: 90 out of 182, Loss: 7.38
+Iteration: 100, Epoch: 1, Batch: 100 out of 182, Loss: 7.27
+thou art more the
+to be or not to the
+wherefore art thou art thou art a
+Iteration: 110, Epoch: 1, Batch: 110 out of 182, Loss: 7.20
+Iteration: 120, Epoch: 1, Batch: 120 out of 182, Loss: 6.81
+Iteration: 130, Epoch: 1, Batch: 130 out of 182, Loss: 6.81
+Iteration: 140, Epoch: 1, Batch: 140 out of 182, Loss: 6.69
+Iteration: 150, Epoch: 1, Batch: 150 out of 182, Loss: 6.73
+thou art more than the
+to be or not to the
+wherefore art thou hast thou art thou hast thou art thou hast thou
+Iteration: 160, Epoch: 1, Batch: 160 out of 182, Loss: 6.66
+Iteration: 170, Epoch: 1, Batch: 170 out of 182, Loss: 6.46
+Iteration: 180, Epoch: 1, Batch: 180 out of 182, Loss: 6.54
+Starting Epoch #2 of 10.
+Iteration: 190, Epoch: 2, Batch: 9 out of 182, Loss: 6.47
+Iteration: 200, Epoch: 2, Batch: 19 out of 182, Loss: 6.42
+thou art more than the
+to be or not to the
+wherefore art thou hast thou art thou hast thou art thou hast thou
+Iteration: 210, Epoch: 2, Batch: 29 out of 182, Loss: 6.34
+Iteration: 220, Epoch: 2, Batch: 39 out of 182, Loss: 6.48
+Iteration: 230, Epoch: 2, Batch: 49 out of 182, Loss: 6.56
+Iteration: 240, Epoch: 2, Batch: 59 out of 182, Loss: 6.36
+Iteration: 250, Epoch: 2, Batch: 69 out of 182, Loss: 6.35
+thou art more than the
+to be or not to the
+wherefore art thou hast thou art thou
+Iteration: 260, Epoch: 2, Batch: 79 out of 182, Loss: 6.26
+Iteration: 270, Epoch: 2, Batch: 89 out of 182, Loss: 6.50
+Iteration: 280, Epoch: 2, Batch: 99 out of 182, Loss: 6.51
+Iteration: 290, Epoch: 2, Batch: 109 out of 182, Loss: 6.39
+Iteration: 300, Epoch: 2, Batch: 119 out of 182, Loss: 6.35
+thou art more than the
+to be or not to the
+wherefore art thou shalt be
+Iteration: 310, Epoch: 2, Batch: 129 out of 182, Loss: 6.24
+Iteration: 320, Epoch: 2, Batch: 139 out of 182, Loss: 6.25
+Iteration: 330, Epoch: 2, Batch: 149 out of 182, Loss: 6.24
+Iteration: 340, Epoch: 2, Batch: 159 out of 182, Loss: 6.27
+Iteration: 350, Epoch: 2, Batch: 169 out of 182, Loss: 6.06
+thou art more than the
+to be or not to the
+wherefore art thou shalt be
+Iteration: 360, Epoch: 2, Batch: 179 out of 182, Loss: 6.17
+Starting Epoch #3 of 10.
+Iteration: 370, Epoch: 3, Batch: 8 out of 182, Loss: 6.16
+Iteration: 380, Epoch: 3, Batch: 18 out of 182, Loss: 6.23
+Iteration: 390, Epoch: 3, Batch: 28 out of 182, Loss: 6.09
+Iteration: 400, Epoch: 3, Batch: 38 out of 182, Loss: 6.26
+thou art more than the
+to be or not to the
+wherefore art thou shalt follow from the
+Iteration: 410, Epoch: 3, Batch: 48 out of 182, Loss: 6.19
+Iteration: 420, Epoch: 3, Batch: 58 out of 182, Loss: 6.07
+Iteration: 430, Epoch: 3, Batch: 68 out of 182, Loss: 6.26
+Iteration: 440, Epoch: 3, Batch: 78 out of 182, Loss: 6.20
+Iteration: 450, Epoch: 3, Batch: 88 out of 182, Loss: 6.04
+thou art more than the
+to be or not to the
+wherefore art thou shalt follow from the
+Iteration: 460, Epoch: 3, Batch: 98 out of 182, Loss: 6.14
+Iteration: 470, Epoch: 3, Batch: 108 out of 182, Loss: 6.39
+Iteration: 480, Epoch: 3, Batch: 118 out of 182, Loss: 6.27
+Iteration: 490, Epoch: 3, Batch: 128 out of 182, Loss: 6.06
