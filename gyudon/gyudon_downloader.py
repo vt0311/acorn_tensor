@@ -11,10 +11,8 @@ CACHE_DIR = "./image/cache"
 def search_photo(keyword, offset=0, limit=100):
     # API 쿼리 조합하기
     keyword_enc = parse.quote_plus(keyword)
-    print(keyword, '/', keyword_enc)
     q = "keyword={0}&offset={1}&limit={2}".format(keyword_enc, offset, limit)
     url = PHOTOZOU_API + "?" + q
-    
     # 캐시 전용 폴더 만들기
     if not os.path.exists(CACHE_DIR):
         os.makedirs(CACHE_DIR)
@@ -46,7 +44,7 @@ def download_thumb(info, save_dir):
             time.sleep(1) # --- 1초 쉬기
         except Exception as e:
             print("[ERROR] failed to downlaod url=", url)
-            
+
 # 모두 검색하고 다운로드하기 --- (※3)
 def download_all(keyword, save_dir, maxphoto = 1000):
     offset = 0
@@ -62,14 +60,12 @@ def download_all(keyword, save_dir, maxphoto = 1000):
         if photo_num == 0:
             print("photo_num = 0, offset=", offset)
             return
-    
         # 사진 정보가 포함돼 있으면 다운받기
         print("*** download offset=", offset)
         download_thumb(info, save_dir)
         offset += limit
         if offset >= maxphoto: break
-        
+
 if __name__ == '__main__':
     # 모듈로 사용할 수 있게 설정
-    download_all(" ", "./image/gyudon") # --- (※4)
-    
+    download_all("牛丼", "./image/gyudon") # --- (※4)
